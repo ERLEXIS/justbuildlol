@@ -1,49 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JustBuildLOL - 1v1 Old School</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: black;
-      height: 100%;
-      overflow: hidden;
-    }
-    #unityContainer {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-</head>
-<body>
-  <div id="unityContainer"></div>
-  <script>
-    const buildUrl = "1v1oldschool/1/";
-    const loaderUrl = buildUrl + "Build.framework.js";
-    const config = {
-      dataUrl: buildUrl + "Build.data",
-      frameworkUrl: loaderUrl,
-      codeUrl: buildUrl + "Build.wasm",
-      streamingAssetsUrl: buildUrl,
-      companyName: "JustPlay.LOL",
-      productName: "1v1.LOL",
-      productVersion: "1.30",
-    };
-
-    const container = document.querySelector("#unityContainer");
-
-    const script = document.createElement("script");
-    script.src = loaderUrl;
-    script.onload = () => {
-      createUnityInstance(container, config).catch((e) => {
-        alert("Errore Unity: " + e);
-        console.error(e);
-      });
-    };
-    document.body.appendChild(script);
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>JustBuild.LOL - 1v1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: black;
+        overflow: hidden;
+      }
+      #unityContainer {
+        width: 100%;
+        height: 100%;
+      }
+      #loadingBar {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 10px;
+        background: #333;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      #progressBarFull {
+        width: 0%;
+        height: 100%;
+        background: #4CAF50;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="unityContainer"></div>
+    <div id="loadingBar">
+      <div id="progressBarFull"></div>
+    </div>
+    <script src="1v1oldschool/1/Build.loader.js"></script>
+  </body>
 </html>
