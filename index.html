@@ -11,7 +11,7 @@
   <script type="text/javascript" src="js/UnityLoader.js"></script>
   <script type="text/javascript" src="js/UnityProgress.js"></script>
 
-  <!-- Stili -->
+  <!-- CSS (se presente) -->
   <link rel="stylesheet" type="text/css" href="css/1v1_lol.css">
 </head>
 
@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <!-- Contenitore gioco -->
+  <!-- Contenitore Unity -->
   <div id="gameContainer" style="width: 100vw; height: 100vh;"></div>
 
   <!-- Loader -->
@@ -47,7 +47,7 @@
   <script src="js/firebase/firebase.js"></script>
   <script src="js/firebase/login.js"></script>
 
-  <!-- Unity Game Loader -->
+  <!-- Avvio Unity Game -->
   <script>
     var gameInstance = UnityLoader.instantiate("gameContainer", "1v1oldschool/1/Build.json", {
       onProgress: UnityProgress
