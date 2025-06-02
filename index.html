@@ -1,47 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="referrer" content="none">
-    <title>fortnite fake</title>
-    <script type="text/javascript" src="js/UnityLoader.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/1v1_lol.css">
+  <meta charset="UTF-8" />
+  <title>JustBuild.LOL</title>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      height: 100%;
+      overflow: hidden;
+    }
+    #unity-container {
+      width: 100%;
+      height: 100%;
+    }
+    #unity-loading-bar {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+  </style>
 </head>
-
 <body>
-    <div id="generalModal" class="modal">
-        <div id="generalModalContent" class="modalContent"></div>
+  <div id="unity-container">
+    <div id="unity-loading-bar">
+      <p>Loading JustBuild.LOL...</p>
     </div>
+  </div>
 
-    <div id="adsModal" class="modal">
-        <div id="content" class="modalContent">
-            <div id="adContainer"></div>
-            <video id="contentElement" hidden></video>
-        </div>
-    </div>
+  <script>
+    var buildUrl = "1v1oldschool/1";
+    var loaderUrl = buildUrl + "/Build.framework.js";
+    var config = {
+      dataUrl: buildUrl + "/Build.data",
+      frameworkUrl: loaderUrl,
+      codeUrl: buildUrl + "/Build.wasm",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "JustPlay.LOL",
+      productName: "1v1.LOL",
+      productVersion: "1.30"
+    };
 
-    <div id="gameContainer"></div>
-    <div id="loader">
-        <img class="logo" src="img/128.png" alt="" width="128" height="128">
-        <div class="spinner"></div>
-        <div class="progress">
-            <div class="full"></div>
-        </div>
-    </div>
-
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="js/firebase/firebase-app.js"></script>
-
-    <!-- Add Firebase products that you want to use -->
-    <script src="js/firebase/firebase-auth.js"></script>
-    <script src="js/firebase/firebase-firestore.js"></script>
-
-    <script src="js/firebase/firebase.js"></script>
-    <script src="js/firebase/login.js"></script>
-
-    <script type="text/javascript" src="js/1v1_lol.js"></script>
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+      createUnityInstance(document.querySelector("#unity-container"), config, (progress) => {
+        document.querySelector("#unity-loading-bar p").innerText = "Loading... " + Math.round(progress * 100) + "%";
+      }).catch((message) => {
+        alert("Failed to load Unity: " + message);
+      });
+    };
+    document.body.appendChild(script);
+  </script>
 </body>
-
 </html>
