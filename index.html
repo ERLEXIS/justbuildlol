@@ -8,9 +8,11 @@
   <title>JUSTBUILD.LOL</title>
 
   <!-- Unity Loader -->
-  <script type="text/javascript" src="js/UnityLoader.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/1v1_lol.css">
-</head>
+<script type="text/javascript" src="js/UnityLoader.js"></script>
+
+<script>
+  var gameInstance = UnityLoader.instantiate("gameContainer", "1v1oldschool/1/Build.json", { onProgress: UnityProgress });
+</script>
 
 <body>
   <div id="generalModal" class="modal">
