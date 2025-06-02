@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>JustBuild.LOL</title>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JustBuildLOL - 1v1 Old School</title>
   <style>
     html, body {
       margin: 0;
@@ -14,48 +12,35 @@
       height: 100%;
       overflow: hidden;
     }
-    #unity-container {
+    #unityContainer {
       width: 100%;
       height: 100%;
-    }
-    #unity-loading-bar {
-      position: absolute;
-      width: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-      text-align: center;
-      color: white;
-      font-family: Arial, sans-serif;
     }
   </style>
 </head>
 <body>
-  <div id="unity-container">
-    <div id="unity-loading-bar">
-      <p>Loading JustBuild.LOL...</p>
-    </div>
-  </div>
-
+  <div id="unityContainer"></div>
   <script>
-    var buildUrl = "1v1oldschool/1";
-    var loaderUrl = buildUrl + "/Build.framework.js";
-    var config = {
-      dataUrl: buildUrl + "/Build.data",
+    const buildUrl = "1v1oldschool/1/";
+    const loaderUrl = buildUrl + "Build.framework.js";
+    const config = {
+      dataUrl: buildUrl + "Build.data",
       frameworkUrl: loaderUrl,
-      codeUrl: buildUrl + "/Build.wasm",
-      streamingAssetsUrl: "StreamingAssets",
+      codeUrl: buildUrl + "Build.wasm",
+      streamingAssetsUrl: buildUrl,
       companyName: "JustPlay.LOL",
       productName: "1v1.LOL",
-      productVersion: "1.30"
+      productVersion: "1.30",
     };
 
-    var script = document.createElement("script");
+    const container = document.querySelector("#unityContainer");
+
+    const script = document.createElement("script");
     script.src = loaderUrl;
     script.onload = () => {
-      createUnityInstance(document.querySelector("#unity-container"), config, (progress) => {
-        document.querySelector("#unity-loading-bar p").innerText = "Loading... " + Math.round(progress * 100) + "%";
-      }).catch((message) => {
-        alert("Failed to load Unity: " + message);
+      createUnityInstance(container, config).catch((e) => {
+        alert("Errore Unity: " + e);
+        console.error(e);
       });
     };
     document.body.appendChild(script);
